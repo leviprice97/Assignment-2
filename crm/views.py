@@ -79,6 +79,12 @@ def service_edit(request, pk):
 	return render(request, 'crm/service_edit.html', {'form': form})
 	
 @login_required
+def product_list(request):
+	product = Product.objects.filter(created_date__lte=timezone.now())
+	return render(request, 'crm/product_list.html',
+	{'products': product})
+	
+@login_required
 def summary(request, pk):
 	customer = get_object_or_404(Customer, pk=pk)
 	customers = Customer.objects.filter(created_date__lte=timezone.now())
